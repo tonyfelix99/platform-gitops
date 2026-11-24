@@ -1,0 +1,44 @@
+nameOverride: ""
+replicaCount: 2
+
+image:
+  repository: ghcr.io/stefanprodan/podinfo
+  tag: "6.7.0"          # never use :latest (Kyverno blocks it)
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 9898
+
+containerPort: 9898
+
+probes:
+  path: /healthz
+  readyPath: /readyz
+
+resources:
+  requests: { cpu: 50m, memory: 64Mi }
+  limits:   { cpu: 250m, memory: 128Mi }
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+pdb:
+  enabled: true
+  minAvailable: 1
+
+ingress:
+  enabled: false
+  className: nginx
+  host: app.example.com
+  tls:
+    enabled: false
+    clusterIssuer: letsencrypt-staging
+
+env: []   # - name: LOG_LEVEL
+          #   value: info
+
+podAnnotations: {}

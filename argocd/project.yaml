@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  description: Application workloads managed via GitOps
+  sourceRepos:
+    - https://github.com/YOUR_ORG/platform-gitops.git      # REPO_URL
+  destinations:
+    - namespace: "app-*"
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist: []          # apps cannot create cluster-scoped resources
+  namespaceResourceBlacklist:
+    - group: ""
+      kind: ResourceQuota

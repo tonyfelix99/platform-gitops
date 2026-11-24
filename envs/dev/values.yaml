@@ -1,0 +1,10 @@
+image:
+  tag: "6.7.0"
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 3
+pdb:
+  enabled: false
+ingress:
+  enabled: true
+  host: dev.app.example.com

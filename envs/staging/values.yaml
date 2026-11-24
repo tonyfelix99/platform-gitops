@@ -1,0 +1,10 @@
+image:
+  tag: "6.7.0"
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 4
+ingress:
+  enabled: true
+  host: staging.app.example.com
+  tls:
+    enabled: true

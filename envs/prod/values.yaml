@@ -1,0 +1,14 @@
+image:
+  tag: "6.7.0"          # promote by PR: copy the tag that passed staging
+autoscaling:
+  minReplicas: 3
+  maxReplicas: 8
+resources:
+  requests: { cpu: 100m, memory: 128Mi }
+  limits:   { cpu: 500m, memory: 256Mi }
+ingress:
+  enabled: true
+  host: app.example.com
+  tls:
+    enabled: true
+    clusterIssuer: letsencrypt-prod

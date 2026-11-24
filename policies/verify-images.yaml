@@ -1,0 +1,30 @@
+# Only admit images signed by your GitHub Actions workflow (Cosign keyless).
+# Start with Audit, then switch to Enforce once the pipeline signs every image.
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signatures
+spec:
+  validationFailureAction: Audit
+  background: false
+  webhookTimeoutSeconds: 30
+  rules:
+    - name: verify-cosign-keyless
+      match:
+        any:
+          - resources:
+              kinds: ["Pod"]
+              namespaces: ["app-*"]
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/YOUR_ORG/*"
+          attestors:
+            - entries:
+                - keyless:
+                    issuer: https://token.actions.githubusercontent.com
+                    subject: "https://github.com/YOUR_ORG/*"
+                    rekor:
+                      url: https://rekor.sigstore.dev
+          mutateDigest: true
+          verifyDigest: true
+          required: true
