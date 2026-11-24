@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Application workloads managed via GitOps
   sourceRepos:
-    - https://github.com/YOUR_ORG/platform-gitops.git      # REPO_URL
+    - https://github.com/tonyfelix99/platform-gitops.git      # REPO_URL
   destinations:
     - namespace: "app-*"
       server: https://kubernetes.default.svc

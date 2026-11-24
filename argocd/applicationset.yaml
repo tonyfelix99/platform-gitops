@@ -16,7 +16,7 @@ spec:
     spec:
       project: apps
       source:
-        repoURL: https://github.com/YOUR_ORG/platform-gitops.git    # REPO_URL
+        repoURL: https://github.com/tonyfelix99/platform-gitops.git    # REPO_URL
         targetRevision: main
         path: charts/webapp
         helm:

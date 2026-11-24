@@ -22,7 +22,7 @@ spec:
             - entries:
                 - keyless:
                     issuer: https://token.actions.githubusercontent.com
-                    subject: "https://github.com/YOUR_ORG/*"
+                    subject: "https://github.com/tonyfelix99/platform-gitops.git"
                     rekor:
                       url: https://rekor.sigstore.dev
           mutateDigest: true
